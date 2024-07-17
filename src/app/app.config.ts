@@ -1,5 +1,9 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {
+  PreloadAllModules,
+  provideRouter,
+  withPreloading,
+} from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -11,10 +15,12 @@ import {
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { NgxLoadingModule } from 'ngx-loading';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { MyPreloadingStrategy } from './preloading';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    MyPreloadingStrategy,
+    provideRouter(routes, withPreloading(MyPreloadingStrategy)),
     provideAnimationsAsync(),
     provideHttpClient(
       withInterceptors([jwtInterceptor, loadingScreenInterceptor])

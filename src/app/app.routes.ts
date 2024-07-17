@@ -18,6 +18,7 @@ export const routes: Routes = [
     pathMatch: 'full',
     loadComponent: () =>
       import('./login/login.component').then((m) => m.LoginComponent),
+    data: { preload: true },
   },
   {
     path: 'register',
@@ -40,6 +41,7 @@ export const routes: Routes = [
       import('./event-detail/event-detail.component').then(
         (m) => m.EventDetailComponent
       ),
+    data: { preload: true },
   },
   {
     path: 'event-detail',
