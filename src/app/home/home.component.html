@@ -1,6 +1,7 @@
 <div class="home-container">
   <app-header></app-header>
   <div class="container">
+    @defer() {
     <section class="filter">
       <mat-form-field>
         <mat-label>Género musical</mat-label>
@@ -13,6 +14,22 @@
       </mat-form-field>
       <span>Selecciona tu género musical favorito</span>
     </section>
+    } @placeholder {
+    <section class="filter">
+      <mat-form-field>
+        <mat-label>Género musical</mat-label>
+        <mat-select [formControl]="currentGenre">
+          <mat-option [value]="0">Todos</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span>Selecciona tu género musical favorito</span>
+    </section>
+    } @loading(minimum 2s) {
+    <span>Loading...</span>
+    } @error {
+    <span>Error :(</span>
+    }
+
     <section class="event-list">
       @for (concert of filteredConcerts$ | async; track $index) {
       <app-event-card
