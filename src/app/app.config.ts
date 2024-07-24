@@ -13,7 +13,7 @@ import {
   loadingScreenInterceptor,
 } from './shared/interceptors/auth.interceptor';
 import { SimpleNotificationsModule } from 'angular2-notifications';
-import { NgxLoadingModule } from 'ngx-loading';
+// import { NgxLoadingModule } from 'ngx-loading';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { MyPreloadingStrategy } from './preloading';
 
@@ -27,8 +27,8 @@ export const appConfig: ApplicationConfig = {
     ),
     provideCharts(withDefaultRegisterables()),
     importProvidersFrom(
-      SimpleNotificationsModule.forRoot(),
-      NgxLoadingModule.forRoot({})
+      SimpleNotificationsModule.forRoot()
+      // NgxLoadingModule.forRoot({})
     ),
   ],
 };
