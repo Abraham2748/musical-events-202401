@@ -5,7 +5,7 @@ import {
   Options,
   SimpleNotificationsModule,
 } from 'angular2-notifications';
-import { NgxLoadingModule } from 'ngx-loading';
+// import { NgxLoadingModule } from 'ngx-loading';
 import { AuthService } from './shared/services/auth.service';
 import {
   BreakpointObserver,
@@ -18,7 +18,7 @@ import {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SimpleNotificationsModule, NgxLoadingModule],
+  imports: [RouterOutlet, SimpleNotificationsModule /*, NgxLoadingModule*/],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
