@@ -29,19 +29,7 @@ export class AppComponent {
     timeOut: 3000,
   };
   authService = inject(AuthService);
-  breakpointObserver = inject(BreakpointObserver);
   constructor() {
     this.authService.verifyLocalStorage();
-
-    //implement angular cdk layout
-    this.breakpointObserver
-      .observe([Breakpoints.Handset, Breakpoints.Tablet])
-      .subscribe((state: BreakpointState) => {
-        if (state.matches) {
-          console.log('Matches small screen');
-        } else {
-          console.log('Matches large screen');
-        }
-      });
   }
 }
