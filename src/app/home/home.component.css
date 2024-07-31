@@ -34,7 +34,7 @@
   }
 }
 
-@media screen and (max-width: 1080px) {
+.medium {
   .home-container {
     & .container {
       & .filter {

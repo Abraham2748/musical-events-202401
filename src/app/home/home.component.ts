@@ -22,6 +22,7 @@ import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loadGenres, loadConcerts } from './store/home.actions';
 import { selectConcerts, selectGenres } from './store/home.selectors';
+import { LayoutService } from '../shared/services/layout.service';
 
 @Component({
   selector: 'app-home',
@@ -50,6 +51,8 @@ export class HomeComponent implements OnInit {
   searchBarService = inject(SearchBarService);
 
   currentGenre = new FormControl(0);
+
+  layoutService = inject(LayoutService);
 
   ngOnInit() {
     this.store.dispatch(loadGenres());
