@@ -17,6 +17,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { MyPreloadingStrategy } from './preloading';
 import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,6 +29,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(SimpleNotificationsModule.forRoot()
     // NgxLoadingModule.forRoot({})
     ),
-    provideStore()
+    provideStore(),
+    provideEffects()
 ],
 };
