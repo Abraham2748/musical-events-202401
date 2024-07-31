@@ -16,19 +16,18 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 // import { NgxLoadingModule } from 'ngx-loading';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { MyPreloadingStrategy } from './preloading';
+import { provideStore } from '@ngrx/store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     MyPreloadingStrategy,
     provideRouter(routes, withPreloading(MyPreloadingStrategy)),
     provideAnimationsAsync(),
-    provideHttpClient(
-      withInterceptors([jwtInterceptor, loadingScreenInterceptor])
-    ),
+    provideHttpClient(withInterceptors([jwtInterceptor, loadingScreenInterceptor])),
     provideCharts(withDefaultRegisterables()),
-    importProvidersFrom(
-      SimpleNotificationsModule.forRoot()
-      // NgxLoadingModule.forRoot({})
+    importProvidersFrom(SimpleNotificationsModule.forRoot()
+    // NgxLoadingModule.forRoot({})
     ),
-  ],
+    provideStore()
+],
 };
