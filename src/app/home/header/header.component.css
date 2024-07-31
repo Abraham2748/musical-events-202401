@@ -42,3 +42,17 @@ header {
     }
   }
 }
+
+@media screen and (max-width: 1080px) {
+  header {
+    & .container {
+      width: 700px;
+      & .search-bar {
+        width: 200px;
+      }
+      & .buttons-container {
+        gap: 10px;
+      }
+    }
+  }
+}

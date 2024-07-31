@@ -33,3 +33,16 @@
     }
   }
 }
+
+@media screen and (max-width: 1080px) {
+  .home-container {
+    & .container {
+      & .filter {
+        width: 700px;
+      }
+      & .event-list {
+        width: 700px;
+      }
+    }
+  }
+}
