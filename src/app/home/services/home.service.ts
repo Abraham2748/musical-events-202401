@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HomeApiResponse } from '../home.model';
 
@@ -12,8 +12,11 @@ export class HomeService {
 
   private baseUrl = environment.baseUrl;
 
+  private data$ = this.http
+    .get<HomeApiResponse>(this.baseUrl + '/api/Home')
+    .pipe(shareReplay());
+
   getData(): Observable<HomeApiResponse> {
-    const apiUrl = this.baseUrl + '/api/Home';
-    return this.http.get<HomeApiResponse>(apiUrl);
+    return this.data$;
   }
 }

@@ -1,4 +1,8 @@
-import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  isDevMode,
+} from '@angular/core';
 import {
   PreloadAllModules,
   provideRouter,
@@ -19,19 +23,24 @@ import { MyPreloadingStrategy } from './preloading';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { homeReducer } from './home/store/home.reducer';
+import { HomeEffect } from './home/store/home.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     MyPreloadingStrategy,
     provideRouter(routes, withPreloading(MyPreloadingStrategy)),
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([jwtInterceptor, loadingScreenInterceptor])),
-    provideCharts(withDefaultRegisterables()),
-    importProvidersFrom(SimpleNotificationsModule.forRoot()
-    // NgxLoadingModule.forRoot({})
+    provideHttpClient(
+      withInterceptors([jwtInterceptor, loadingScreenInterceptor])
     ),
-    provideStore(),
-    provideEffects(),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
-],
+    provideCharts(withDefaultRegisterables()),
+    importProvidersFrom(
+      SimpleNotificationsModule.forRoot()
+      // NgxLoadingModule.forRoot({})
+    ),
+    provideStore({ home: homeReducer }),
+    provideEffects([HomeEffect]),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+  ],
 };

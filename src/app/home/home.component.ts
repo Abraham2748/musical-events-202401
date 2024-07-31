@@ -19,6 +19,9 @@ import {
 } from 'rxjs';
 import { SearchBarService } from './services/search-bar.service';
 import { RouterLink } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { loadGenres, loadConcerts } from './store/home.actions';
+import { selectConcerts, selectGenres } from './store/home.selectors';
 
 @Component({
   selector: 'app-home',
@@ -37,27 +40,25 @@ import { RouterLink } from '@angular/router';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  genres$ = new Observable<Genre[]>();
+  store = inject(Store);
+
+  genres$ = this.store.select(selectGenres);
+
+  initialConcerts$ = this.store.select(selectConcerts);
   filteredConcerts$ = new Observable<Concert[]>();
 
-  homeService = inject(HomeService);
   searchBarService = inject(SearchBarService);
 
   currentGenre = new FormControl(0);
 
   ngOnInit() {
-    const data$ = this.homeService.getData().pipe(shareReplay(1));
-
-    this.genres$ = data$.pipe(
-      map((data) => data.genres.filter((genre) => genre.status))
-    );
-
-    const initialConcerts$ = data$.pipe(map((data) => data.concerts));
+    this.store.dispatch(loadGenres());
+    this.store.dispatch(loadConcerts());
 
     const filterByGenre$ = this.currentGenre.valueChanges.pipe(
       startWith(0),
       switchMap((genreId) =>
-        initialConcerts$.pipe(
+        this.initialConcerts$.pipe(
           map((concerts) =>
             genreId === 0
               ? concerts
