@@ -43,7 +43,7 @@ header {
   }
 }
 
-@media screen and (max-width: 1080px) {
+.medium {
   header {
     & .container {
       width: 700px;
