@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
 import {
   PreloadAllModules,
   provideRouter,
@@ -18,6 +18,7 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { MyPreloadingStrategy } from './preloading';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,6 +31,7 @@ export const appConfig: ApplicationConfig = {
     // NgxLoadingModule.forRoot({})
     ),
     provideStore(),
-    provideEffects()
+    provideEffects(),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
 ],
 };
