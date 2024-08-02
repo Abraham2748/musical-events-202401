@@ -30,6 +30,6 @@ export class AppComponent {
   };
   authService = inject(AuthService);
   constructor() {
-    this.authService.verifyLocalStorage();
+    //this.authService.verifyLocalStorage();
   }
 }

@@ -11,7 +11,11 @@ import {
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import {
   jwtInterceptor,
   loadingScreenInterceptor,
@@ -25,6 +29,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { homeReducer } from './home/store/home.reducer';
 import { HomeEffect } from './home/store/home.effects';
+import { provideClientHydration } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -32,7 +37,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withPreloading(MyPreloadingStrategy)),
     provideAnimationsAsync(),
     provideHttpClient(
-      withInterceptors([jwtInterceptor, loadingScreenInterceptor])
+      withInterceptors([jwtInterceptor, loadingScreenInterceptor]),
+      withFetch()
     ),
     provideCharts(withDefaultRegisterables()),
     importProvidersFrom(
@@ -42,5 +48,6 @@ export const appConfig: ApplicationConfig = {
     provideStore({ home: homeReducer }),
     provideEffects([HomeEffect]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideClientHydration(),
   ],
 };

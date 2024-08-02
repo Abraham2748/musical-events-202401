@@ -2,19 +2,22 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { finalize, tap } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { DOCUMENT } from '@angular/common';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req);
 };
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log('jwtInterceptor');
-  const token = localStorage.getItem('token');
+  const localStorage = inject(DOCUMENT).defaultView?.localStorage;
   let clonedRequest = req;
-  if (token) {
-    clonedRequest = req.clone({
-      headers: req.headers.set('Authorization', `Bearer ${token}`),
-    });
+  if (localStorage) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      clonedRequest = req.clone({
+        headers: req.headers.set('Authorization', `Bearer ${token}`),
+      });
+    }
   }
   return next(clonedRequest);
 };
