@@ -7,6 +7,7 @@ import {
   FormControl,
   Validators,
   ReactiveFormsModule,
+  ValidatorFn,
 } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -34,6 +35,28 @@ import { NotificationsService } from 'angular2-notifications';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
+  hasNumberValidator: ValidatorFn = (control) => {
+    return control.value && !/\d/.test(control.value)
+      ? { hasNumber: true }
+      : null;
+  };
+  hasUpperValidator: ValidatorFn = (control) => {
+    return control.value && !/[A-Z]/.test(control.value)
+      ? { hasUpper: true }
+      : null;
+  };
+  hasLowerValidator: ValidatorFn = (control) => {
+    return control.value && !/[a-z]/.test(control.value)
+      ? { hasLower: true }
+      : null;
+  };
+  hasSpecialValidator: ValidatorFn = (control) => {
+    return control.value &&
+      !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(control.value)
+      ? { hasSpecial: true }
+      : null;
+  };
+
   registerForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -42,6 +65,10 @@ export class RegisterComponent {
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
+      this.hasNumberValidator,
+      this.hasUpperValidator,
+      this.hasLowerValidator,
+      this.hasSpecialValidator,
     ]),
     documentType: new FormControl('', [Validators.required]),
     documentNumber: new FormControl('', [Validators.required]),
