@@ -11,6 +11,7 @@ import {
 } from '../models/auth.model';
 import { Observable, catchError, of } from 'rxjs';
 import { NotificationsService } from 'angular2-notifications';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,7 @@ export class AuthService {
   loading = signal(false);
   loggedIn = signal(false);
   isAdministrator = signal(false);
+  userFullName = signal('');
 
   login(email: string, password: string): Observable<LoginApiResponse> {
     const apiUrl = this.baseUrl + '/api/users/login';
@@ -37,19 +39,43 @@ export class AuthService {
       })
     );
   }
-  logout() {
+  logout(jwtExpired = false) {
     localStorage.clear();
     this.loggedIn.set(false);
     this.isAdministrator.set(false);
-    this.notificationsService.success('Logout exitoso', 'Hasta luego');
+    this.userFullName.set('');
+    if (jwtExpired)
+      this.notificationsService.error(
+        'Sesión expirada',
+        'Por favor inicia sesión de nuevo'
+      );
+    else this.notificationsService.success('Logout exitoso', 'Hasta luego');
+  }
+
+  isTokenExpired() {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    const decoded = jwtDecode<any>(token);
+    const expirationDate = new Date(decoded.exp * 1000);
+    return expirationDate < new Date();
   }
 
   verifyLocalStorage() {
     const token = localStorage.getItem('token');
     this.loggedIn.set(token ? true : false);
 
-    const isAdministrator = localStorage.getItem('isAdministrator');
-    this.isAdministrator.set(isAdministrator === 'true');
+    if (!token) return;
+
+    const decoded = jwtDecode<any>(token);
+    const jwtRole =
+      decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    const jwtName =
+      decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+
+    const isAdministrator = jwtRole === 'Administrator';
+    this.isAdministrator.set(isAdministrator);
+    this.userFullName.set(jwtName);
   }
 
   register(body: RegisterRequestBody): Observable<RegisterApiResponse> {

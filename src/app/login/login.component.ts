@@ -49,14 +49,14 @@ export class LoginComponent {
       if (response && response.success) {
         localStorage.setItem('token', response.data.token);
         this.authService.loggedIn.set(true);
+        this.authService.verifyLocalStorage();
         this.notifications.success(
           'Login Exitoso',
           'Bienvenido a Musical Events'
         );
-        const isAdministrator = email === 'admin@gmail.com';
-        this.authService.isAdministrator.set(isAdministrator);
-        localStorage.setItem('isAdministrator', isAdministrator.toString());
-        this.router.navigate([isAdministrator ? '/admin' : '/customer']);
+        this.router.navigate([
+          this.authService.isAdministrator() ? '/admin' : '/customer',
+        ]);
       } else {
         this.notifications.error('Login Fallido', 'Revisa tus credenciales');
       }

@@ -8,7 +8,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 };
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log('jwtInterceptor');
+  const authService = inject(AuthService);
+  if (authService.isTokenExpired()) {
+    authService.logout(true);
+    return next(req);
+  }
   const token = localStorage.getItem('token');
   let clonedRequest = req;
   if (token) {
