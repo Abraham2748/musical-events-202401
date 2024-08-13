@@ -25,7 +25,7 @@ jobs:
         run: npm run build # O npm run deploy si estás usando angular-cli-ghpages
 
       - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.abraham2748.com
           username: ${{ secrets.FTP_USERNAME }}
