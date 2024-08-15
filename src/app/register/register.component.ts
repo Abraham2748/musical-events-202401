@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { FooterComponent } from '../shared/components/footer/footer.component';
-import { HeaderComponent } from '../home/header/header.component';
 import { SimpleHeaderComponent } from '../shared/components/simple-header/simple-header.component';
 import {
   FormGroup,
@@ -52,7 +51,7 @@ export class RegisterComponent {
   };
   hasSpecialValidator: ValidatorFn = (control) => {
     return control.value &&
-      !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(control.value)
+      !/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/.test(control.value)
       ? { hasSpecial: true }
       : null;
   };

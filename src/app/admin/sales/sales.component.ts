@@ -19,6 +19,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { FormattedDataModel } from './sales.model';
 import { AsyncPipe } from '@angular/common';
+import { Sale } from '../../shared/models/sale.model';
 
 @Component({
   selector: 'app-sales',
@@ -141,7 +142,7 @@ export class SalesComponent implements OnInit, AfterViewInit {
       });
   }
 
-  handleSalesResponse(data: any[]) {
+  handleSalesResponse(data: Sale[]) {
     if (data.length === 0) {
       this.disableFilterControls();
       return;
@@ -149,11 +150,11 @@ export class SalesComponent implements OnInit, AfterViewInit {
     this.enableFilterControls();
     this.initialData = data.map(this.formatSaleData);
     this.dataSource.data = this.initialData;
-    this.genres = this.extractUniqueValues(data, 'genre');
-    this.events = this.extractUniqueValues(data, 'title');
+    this.genres = Array.from(new Set(data.map((item) => item.genre)));
+    this.events = Array.from(new Set(data.map((item) => item.title)));
   }
 
-  formatSaleData(sale: any): FormattedDataModel {
+  formatSaleData(sale: Sale): FormattedDataModel {
     return {
       client: sale.fullName,
       event: sale.title,
@@ -163,10 +164,6 @@ export class SalesComponent implements OnInit, AfterViewInit {
       saleDate: sale.saleDate,
       genre: sale.genre,
     };
-  }
-
-  extractUniqueValues(data: any[], key: string): string[] {
-    return Array.from(new Set(data.map((item) => item[key])));
   }
 
   enableFilterControls() {

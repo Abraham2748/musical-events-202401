@@ -2,7 +2,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { BuyApiResponse, BuyRequestBody } from '../../shared/models/buy.model';
 import { SaleApiResponse, emptySale } from '../../shared/models/sale.model';
 
 @Injectable({

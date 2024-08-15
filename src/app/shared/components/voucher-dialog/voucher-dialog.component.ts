@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Sale, emptySale } from '../../models/sale.model';
+import { Sale } from '../../models/sale.model';
 import { Observable, map } from 'rxjs';
 import { VoucherService } from '../../../event-detail/services/voucher.service';
 import { AsyncPipe } from '@angular/common';

@@ -3,11 +3,7 @@ import {
   importProvidersFrom,
   isDevMode,
 } from '@angular/core';
-import {
-  PreloadAllModules,
-  provideRouter,
-  withPreloading,
-} from '@angular/router';
+import { provideRouter, withPreloading } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';

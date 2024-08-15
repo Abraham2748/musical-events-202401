@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import {
+  DecodedToken,
   ForgotPasswordApiResponse,
   ForgotPasswordRequestBody,
   LoginApiResponse,
@@ -56,7 +57,7 @@ export class AuthService {
     const token = localStorage.getItem('token');
     if (!token) return;
 
-    const decoded = jwtDecode<any>(token);
+    const decoded = jwtDecode<DecodedToken>(token);
     const expirationDate = new Date(decoded.exp * 1000);
     return expirationDate < new Date();
   }
@@ -67,7 +68,7 @@ export class AuthService {
 
     if (!token) return;
 
-    const decoded = jwtDecode<any>(token);
+    const decoded = jwtDecode<DecodedToken>(token);
     const jwtRole =
       decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
     const jwtName =

@@ -1,24 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {
-  NotificationsService,
-  Options,
-  SimpleNotificationsModule,
-} from 'angular2-notifications';
-// import { NgxLoadingModule } from 'ngx-loading';
+import { Options, SimpleNotificationsModule } from 'angular2-notifications';
 import { AuthService } from './shared/services/auth.service';
-import {
-  BreakpointObserver,
-  Breakpoints,
-  BreakpointState,
-  LayoutModule,
-  MediaMatcher,
-} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SimpleNotificationsModule /*, NgxLoadingModule*/],
+  imports: [RouterOutlet, SimpleNotificationsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

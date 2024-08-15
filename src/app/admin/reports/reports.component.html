@@ -18,8 +18,11 @@
 
   <div
     (click)="createPdf()"
+    (keydown.enter)="createPdf()"
+    (keydown.space)="createPdf()"
+    tabindex="0"
     style="display: flex; justify-content: center; cursor: pointer"
   >
-    <img src="assets/images/admin/pdf.png" alt="" />
+    <img src="assets/images/admin/pdf.png" alt="Generate PDF" />
   </div>
 </div>
