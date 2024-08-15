@@ -27,4 +27,8 @@ jobs:
           git config --global user.name "${{ secrets.GIT_USER_NAME }}"
 
       - name: Deploy to GitHub Pages
-        run: npm run deploy-ghpages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/Abraham2748/musical-events-202401.git
+          npm run deploy-ghpages
