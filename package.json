@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build-namecheap": "ng build --base-href https://abraham2748.com",
-    "deploy-ghpages": "ng deploy",
+    "build-ghpages": "ng build --base-href https://abraham2748.github.io",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
