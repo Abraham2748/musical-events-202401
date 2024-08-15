@@ -23,44 +23,9 @@ jobs:
 
       - name: Build Angular app
         run: npm run build-ghpages
-      
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.6.3
         with:
           branch: gh-pages
           folder: dist/musical-events/browser
-
-
-
-
-
-
-
-name: GitHub Pages Deploy
-
-on:
-  push:
-    branches:
-      - "master"
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.17]
-    
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Install and build
-        working-directory: ./angular-crash-2021
-        run: npm install && npm run gh-build && cp dist/angular-crash/index.html dist/angular-crash/404.html
-      
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.1
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: angular-crash-2021/dist/angular-crash # The folder the action should deploy. 
