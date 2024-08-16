@@ -6,6 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "build-namecheap": "ng build --base-href https://abraham2748.com",
+    "build-cloudflare": "ng build --base-href https://musical-events.pages.dev",
+    "deploy-cloudflare": "wrangler pages deploy dist/musical-events/browser",
+    "cloudflare": "npm run build-cloudflare && npm run deploy-cloudflare",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
