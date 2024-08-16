@@ -11,6 +11,7 @@
     "build-firebase": "ng build --base-href https://musical-events-2748.web.app",
     "deploy-firebase": "npm run build-firebase && firebase deploy",
     "cloudflare": "npm run build-cloudflare && npm run deploy-cloudflare",
+    "build-ghpages": "ng build --base-href https://abraham2748.com",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
