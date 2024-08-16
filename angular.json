@@ -108,7 +108,7 @@
           "defaultConfiguration": "production",
           "configurations": {
             "production": {
-              "baseHref": "https://abraham2748.github.io/musical-events-202401/",
+              "baseHref": "https://abraham2748.com/",
               "repo": "https://github.com/abraham2748/musical-events-202401"
             }
           }
