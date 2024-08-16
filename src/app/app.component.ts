@@ -11,7 +11,6 @@ import { AuthService } from './shared/services/auth.service';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'musical-events';
   notificationsOptions: Options = {
     position: ['top', 'right'],
     timeOut: 3000,

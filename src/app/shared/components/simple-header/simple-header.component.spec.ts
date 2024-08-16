@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SimpleHeaderComponent } from './simple-header.component';
+import { provideRouter, withPreloading } from '@angular/router';
+import { routes } from '../../../app.routes';
+import { MyPreloadingStrategy } from '../../../preloading';
 
 describe('SimpleHeaderComponent', () => {
   let component: SimpleHeaderComponent;
@@ -8,10 +11,10 @@ describe('SimpleHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SimpleHeaderComponent]
-    })
-    .compileComponents();
-    
+      imports: [SimpleHeaderComponent],
+      providers: [provideRouter(routes, withPreloading(MyPreloadingStrategy))],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(SimpleHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

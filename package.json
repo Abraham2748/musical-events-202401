@@ -13,7 +13,7 @@
     "cloudflare": "npm run build-cloudflare && npm run deploy-cloudflare",
     "build-ghpages": "ng build --base-href https://abraham2748.com",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --no-watch --browsers=ChromeHeadless",
     "lint": "ng lint"
   },
   "private": true,

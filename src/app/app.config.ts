@@ -31,10 +31,7 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([jwtInterceptor, loadingScreenInterceptor])
     ),
     provideCharts(withDefaultRegisterables()),
-    importProvidersFrom(
-      SimpleNotificationsModule.forRoot()
-      // NgxLoadingModule.forRoot({})
-    ),
+    importProvidersFrom(SimpleNotificationsModule.forRoot()),
     provideStore({ home: homeReducer }),
     provideEffects([HomeEffect]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
